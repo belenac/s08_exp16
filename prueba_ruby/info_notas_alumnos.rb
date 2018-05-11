@@ -1,3 +1,19 @@
+def status_alum(nota_promedio)
+  notas = File.open('curso.csv', 'r').readlines
+  notas.map do |elem|
+    data = elem.split(', ').map { |e| e.chomp }
+    notas_alumno = data[1..5].delete_if { |e| e == 'A' }
+    notas_decimales = notas_alumno.map { |e| e.to_f }
+    suma_notas = notas_decimales.inject(0) { |sum, num| sum + num }
+    promedio = suma_notas / notas_decimales.count
+    if promedio <= nota_promedio
+      puts "El alumno #{data[0]} reprobo con promedio #{promedio}"
+    else
+      puts "El alumno #{data[0]} aprobo con promedio #{promedio}"
+    end
+  end
+end
+
 input = 0
 while input
   puts 'Ingrese una opción'
@@ -37,21 +53,6 @@ while input
     end
   when 3
     # Opcion 3: Debe mostrar los nombres de los alumnos aprobados.
-    def status_alum(nota_promedio)
-      notas = File.open('curso.csv', 'r').readlines
-      notas.map do |elem|
-        data = elem.split(', ').map { |e| e.chomp }
-        notas_alumno = data[1..5].delete_if { |e| e == 'A' }
-        notas_decimales = notas_alumno.map { |e| e.to_f }
-        suma_notas = notas_decimales.inject(0) { |sum, num| sum + num }
-        promedio = suma_notas / notas_decimales.count
-        if promedio <= nota_promedio
-          puts "El alumno #{data[0]} reprobo con promedio #{promedio}"
-        else
-          puts "El alumno #{data[0]} aprobo con promedio #{promedio}"
-        end
-      end
-    end
     status_alum(5.0)
   when 4
     # Opcion 4: Terminar el programa.
