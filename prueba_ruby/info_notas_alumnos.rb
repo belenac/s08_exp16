@@ -1,5 +1,7 @@
 def status_alum(nota_promedio)
-  notas = File.open('curso.csv', 'r').readlines
+  arr = File.open('curso.csv', 'r')
+  notas = arr.readlines
+  arr.close
   notas.map do |elem|
     data = elem.split(', ').map { |e| e.chomp }
     notas_alumno = data[1..5].delete_if { |e| e == 'A' }
@@ -12,7 +14,6 @@ def status_alum(nota_promedio)
       puts "El alumno #{data[0]} aprobo con promedio #{promedio}"
     end
   end
-  file.close
 end
 
 input = 0
@@ -27,7 +28,9 @@ while input
   case input
   when 1
     # Opcion 1: Debe generar un archivo con el nombre de cada alumno y el promedio de sus notas.
-    notas = File.open('curso.csv', 'r').readlines
+    arr = File.open('curso.csv', 'r')
+    notas = arr.readlines
+    arr.close
     notas.map do |elem|
       data = elem.split(', ').map { |e| e.chomp }
       notas_alumno = data[1..5].delete_if { |e| e == 'A' }
@@ -36,11 +39,11 @@ while input
       promedio = suma_notas / notas_decimales.count
       File.open('promedio_alumnos.txt', 'a') { |file| file.puts "El alumno #{data[0]} tiene un promedio de #{promedio}" }
     end
-    file.close
     puts "Se ha creado un archivo llamado promedio_alumnos.txt en su directorio.\n"
   when 2
     # Opcion 2: Debe contar la cantidad de inasistencias totales y mostrarlas en pantalla.
-    asistencia = File.open('curso.csv', 'r').readlines
+    arr = File.open('curso.csv', 'r')
+    asistencia = arr.readlines
     asistencia.map do |elem|
       info = elem.split(', ').map { |e| e.chomp }
       alumno = info[0]
@@ -53,7 +56,6 @@ while input
         puts "El alumno #{alumno} ha faltado a #{faltas} evaluaciones."
       end
     end
-    file.close
   when 3
     # Opcion 3: Debe mostrar los nombres de los alumnos aprobados.
     status_alum(5.0)
