@@ -12,6 +12,7 @@ def status_alum(nota_promedio)
       puts "El alumno #{data[0]} aprobo con promedio #{promedio}"
     end
   end
+  file.close
 end
 
 input = 0
@@ -35,6 +36,7 @@ while input
       promedio = suma_notas / notas_decimales.count
       File.open('promedio_alumnos.txt', 'a') { |file| file.puts "El alumno #{data[0]} tiene un promedio de #{promedio}" }
     end
+    file.close
     puts "Se ha creado un archivo llamado promedio_alumnos.txt en su directorio.\n"
   when 2
     # Opcion 2: Debe contar la cantidad de inasistencias totales y mostrarlas en pantalla.
@@ -51,6 +53,7 @@ while input
         puts "El alumno #{alumno} ha faltado a #{faltas} evaluaciones."
       end
     end
+    file.close
   when 3
     # Opcion 3: Debe mostrar los nombres de los alumnos aprobados.
     status_alum(5.0)
