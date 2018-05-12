@@ -33,8 +33,15 @@ while input
     arr.close
     notas.map do |elem|
       data = elem.split(', ').map { |e| e.chomp }
-      notas_alumno = data[1..5].delete_if { |e| e == 'A' }
-      notas_decimales = notas_alumno.map { |e| e.to_f }
+      # notas_alumno = data[1..5].delete_if { |e| e == 'A' }
+      # notas_decimales = notas_alumno.map { |e| e.to_f }
+      notas_decimales = data[1..5].map do |e|
+        if e == 'A'
+          0
+        else
+          e.to_f
+        end
+      end
       suma_notas = notas_decimales.inject(0) { |sum, num| sum + num }
       promedio = suma_notas / notas_decimales.count
       File.open('promedio_alumnos.txt', 'a') { |file| file.puts "El alumno #{data[0]} tiene un promedio de #{promedio}" }
