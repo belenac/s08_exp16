@@ -46,7 +46,7 @@ while input
       promedio = suma_notas / notas_decimales.count
       File.open('promedio_alumnos.txt', 'a') { |file| file.puts "El alumno #{data[0]} tiene un promedio de #{promedio}" }
     end
-    puts "Se ha creado un archivo llamado promedio_alumnos.txt en su directorio.\n"
+    puts "Se ha creado un archivo llamado promedio_alumnos.txt en su directorio.\n", __dir__
   when 2
     # Opcion 2: Debe contar la cantidad de inasistencias totales y mostrarlas en pantalla.
     arr = File.open('curso.csv', 'r')
